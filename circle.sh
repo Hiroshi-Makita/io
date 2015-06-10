@@ -1,11 +1,11 @@
-function setupForCoreTest() {
-  # copy configuration file for CI environment
-  cp -p core/src/test/resources/ci/dc-config.properties core/src/test/resources/dc-config.properties
-
-  # regist data for test
-  mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#reset > $CIRCLE_ARTIFACTS/core-reset.log
-  mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#resetEventLog > $CIRCLE_ARTIFACTS/core-resetEventLog.log
-}
+# function setupForCoreTest() {
+#   # copy configuration file for CI environment
+#   cp -p core/src/test/resources/ci/dc-config.properties core/src/test/resources/dc-config.properties
+# 
+#   # regist data for test
+#   mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#reset > $CIRCLE_ARTIFACTS/core-reset.log
+#   mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#resetEventLog > $CIRCLE_ARTIFACTS/core-resetEventLog.log
+# }
 
 case "$1" in
   pre_machine)
@@ -55,14 +55,26 @@ case "$1" in
 
       1)
         # run core that included in com.fujitsu.dc.core except odatacol
-        setupForCoreTest
+        # copy configuration file for CI environment
+        cp -p core/src/test/resources/ci/dc-config.properties core/src/test/resources/dc-config.properties
+
+        # regist data for test
+        mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#reset > $CIRCLE_ARTIFACTS/core-reset.log
+        mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#resetEventLog > $CIRCLE_ARTIFACTS/core-resetEventLog.log
+
         mvn site -B -pl core -Ddependency.locations.enabled=false -Dsurefire.exclude.pattern=com/fujitsu/dc/test/** > $CIRCLE_ARTIFACTS/core-site.log
 
         ;;
 
       2)
         # run core that included in com.fujitsu.dc.test except odatacol
-        setupForCoreTest
+        # copy configuration file for CI environment
+        cp -p core/src/test/resources/ci/dc-config.properties core/src/test/resources/dc-config.properties
+
+        # regist data for test
+        mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#reset > $CIRCLE_ARTIFACTS/core-reset.log
+        mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#resetEventLog > $CIRCLE_ARTIFACTS/core-resetEventLog.log
+
         mvn site -B -pl core -Ddependency.locations.enabled=false -Dsurefire.exclude.pattern=com/fujitsu/dc/core/** > $CIRCLE_ARTIFACTS/core-site.log
 
         ;;
