@@ -24,14 +24,11 @@ dependencies:
     - sudo chown -R ubuntu.ubuntu /fjnfs
     - sudo mkdir -p /fj/logback/log/
     - sudo chown -R ubuntu.ubuntu /fj
-
-database:
-  override:
+    # clean the artifacts dir from the previous build
+    - rm -rf artifacts && mkdir -p artifacts/log
 
 test:
   override:
-    # clean the artifacts dir from the previous build
-    - rm -rf artifacts && mkdir -p artifacts/log
     - cp -p core/src/test/resources/ci/dc-config.properties core/src/test/resources/dc-config.properties
     - /bin/sh ./circle.sh test:
         parallel: true
