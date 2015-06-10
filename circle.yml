@@ -30,12 +30,9 @@ test:
     - sudo mkdir -p /fj/logback/log/
     - sudo chown -R ubuntu.ubuntu /fj
     - cp -p core/src/test/resources/ci/dc-config.properties core/src/test/resources/dc-config.properties
-    # regist data for test
-    - mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#reset > artifacts/log/core-reset.log
-    - mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#resetEventLog > artifacts/log/core-resetEventLog.log
 
   override:
-    - ./circle.sh test:
+    - /bin/sh ./circle.sh test:
         parallel: true
         timeout: 7200
 
