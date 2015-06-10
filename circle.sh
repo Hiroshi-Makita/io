@@ -56,36 +56,26 @@ case "$1" in
       1)
         # run core that included in com.fujitsu.dc.core except odatacol
         setupForCoreTest
-
-        # exclude test
-        echo "com.fujitsu.dc.test.*" >> .test-excludes
-        echo "com.fujitsu.dc.test.jersey.box.odatacol.*" >> .test-excludes
-
-        mvn site -B -pl core -Ddependency.locations.enabled=false > $CIRCLE_ARTIFACTS/core-site.log
+        mvn site -B -pl core -Ddependency.locations.enabled=false -Dsurefire.exclude.pattern=com/fujitsu/dc/test/** > $CIRCLE_ARTIFACTS/core-site.log
 
         ;;
 
       2)
         # run core that included in com.fujitsu.dc.test except odatacol
         setupForCoreTest
-
-        # exclude test
-        echo "com.fujitsu.dc.core.*" >> .test-excludes
-        echo "com.fujitsu.dc.test.jersey.box.odatacol.*" >> .test-excludes
-
-        mvn site -B -pl core -Ddependency.locations.enabled=false > $CIRCLE_ARTIFACTS/core-site.log
+        mvn site -B -pl core -Ddependency.locations.enabled=false -Dsurefire.exclude.pattern=com/fujitsu/dc/core/** > $CIRCLE_ARTIFACTS/core-site.log
 
         ;;
 
       3)
-        # run core that included in com.fujitsu.dc.test.jersey.box.odatacol
-        setupForCoreTest
-
-        # exclude test
-        echo "com.fujitsu.dc.core.*" >> .test-excludes
-        echo "com.fujitsu.dc.test.*" >> .test-excludes
-
-        mvn site -B -pl core -Ddependency.locations.enabled=false > $CIRCLE_ARTIFACTS/core-site.log
+#        # run core that included in com.fujitsu.dc.test.jersey.box.odatacol
+#        setupForCoreTest
+#
+#        # exclude test
+#        echo "com.fujitsu.dc.core.*" >> .test-excludes
+#        echo "com.fujitsu.dc.test.*" >> .test-excludes
+#
+#        mvn site -B -pl core -Ddependency.locations.enabled=false > $CIRCLE_ARTIFACTS/core-site.log
 
         ;;
 

@@ -16,13 +16,14 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<final.name>dc1-core</final.name>
-				<esapi.version>1_2</esapi.version>
-				<java.version>1.7</java.version>
-				<jvm.option>-Xms512m -Xmx1024m -XX:MaxPermSize=1024m
-					-XX:-UseSplitVerifier</jvm.option>
-				<logback.version>1.0.12</logback.version>
-				<slf4j.version>1.7.4</slf4j.version>
-			</properties>
+		<esapi.version>1_2</esapi.version>
+		<java.version>1.7</java.version>
+		<jvm.option>-Xms512m -Xmx512m -XX:MaxPermSize=512m
+			-XX:-UseSplitVerifier</jvm.option>
+		<logback.version>1.0.12</logback.version>
+		<slf4j.version>1.7.4</slf4j.version>
+		<surefire.exclude.pattern>surefire.dummy.pattern</surefire.exclude.pattern>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -316,8 +317,8 @@
 						<exclude>**/jersey/box/ServiceRelayTest.java</exclude>
 						<exclude>**/jersey/AcceptEncodingTest.java</exclude>
 						<exclude>**/performance/**/*Test.java</exclude>
+						<exclude>${surefire.exclude.pattern}</exclude>
 					</excludes>
-					<excludesFile>../.test-excludes</excludesFile>
 				</configuration>
 				<executions>
 					<execution>
