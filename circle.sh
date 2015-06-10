@@ -2,14 +2,18 @@ case "$1" in
   test)
     case $CIRCLE_NODE_INDEX in
       0)
-        echo pwd: `pwd`
+        ls -l artifacts
+        ls -l /fjnfs/dc-core/
+        ls -l /fj/logback/log/
         # run common tests
         mvn site -B -pl common -Ddependency.locations.enabled=false > artifacts/log/common-site.log
 
         ;;
 
       1)
-        echo pwd: `pwd`
+        ls -l artifacts
+        ls -l /fjnfs/dc-core/
+        ls -l /fj/logback/log/
         # run core
         # regist data for test
         mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#reset > artifacts/log/core-reset.log

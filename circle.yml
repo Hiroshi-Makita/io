@@ -23,7 +23,8 @@ dependencies:
 test:
   pre:
     # clean the artifacts dir from the previous build
-    - rm -rf artifacts && mkdir -p artifacts/log; echo `pwd`
+    - rm -rf artifacts
+    - mkdir -p artifacts/log
     # create directory
     - sudo mkdir -p /fjnfs/dc-core/{dav,eventlog,barInstall}
     - sudo chown -R ubuntu.ubuntu /fjnfs
