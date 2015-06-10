@@ -20,8 +20,8 @@ case "$1" in
 
     esac
 
-    ;;
-
     find . -maxdepth 1 -type d ! -name "." -exec mv {}/target/site $CIRCLE_ARTIFACTS/{} \;
+
+    ;;
 
 esac
