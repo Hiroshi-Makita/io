@@ -1,39 +1,22 @@
 machine:
   timezone:
     Asia/Tokyo
+  pre:
+    - /bin/sh io/circle.sh pre_machine
   environment:
     MAVEN_OPTS: -Xmx1024M -Xss128M -XX:MaxPermSize=1024M -XX:+CMSClassUnloadingEnabled
 
 dependencies:
   override:
-    - mvn install -B -pl es-api,common,logback -Dmaven.javadoc.skip=true -Dmaven.test.skip=true
-
+    - /bin/sh ./circle.sh dependencies
   post:
-    # elasticsearch
-    - wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.3.4.tar.gz
-    - tar -xvf elasticsearch-1.3.4.tar.gz
-    - cp -p core/src/test/resources/ci/elasticsearch.yml elasticsearch-1.3.4/config/elasticsearch.yml
-    - elasticsearch-1.3.4/bin/elasticsearch: {background: true}
-    # MySQL
-    - sudo apt-add-repository -y 'deb http://ppa.launchpad.net/ondrej/mysql-experimental/ubuntu precise main'
-    - sudo apt-get update; sudo DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server-5.5
-    - sudo cp -p core/src/test/resources/ci/my.cnf /etc/mysql/my.cnf
-    - sudo service mysql restart
-    # create directory
-    - sudo mkdir -p /fjnfs/dc-core/{dav,eventlog,barInstall}
-    - sudo chown -R ubuntu.ubuntu /fjnfs
-    - sudo mkdir -p /fj/logback/log/
-    - sudo chown -R ubuntu.ubuntu /fj
+    - /bin/sh ./circle.sh dependencies_post
 
 test:
   override:
     - /bin/sh ./circle.sh test:
         parallel: true
         timeout: 7200
-
-  post:
-    # - mkdir -p $CIRCLE_TEST_REPORTS/junit/common
-    # - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/common/ \;
 
 # deployment:
 #   pre:
