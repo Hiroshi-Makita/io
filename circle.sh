@@ -9,6 +9,8 @@ case "$1" in
 
       1)
         # run core
+        # copy configuration file for CI environment
+        cp -p core/src/test/resources/ci/dc-config.properties core/src/test/resources/dc-config.properties
         # regist data for test
         mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#reset > $CIRCLE_ARTIFACTS/core-reset.log
         mvn test -B -pl core -Dtest=com.fujitsu.dc.test.setup.Setup#resetEventLog > $CIRCLE_ARTIFACTS/core-resetEventLog.log
