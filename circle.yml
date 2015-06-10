@@ -24,8 +24,6 @@ dependencies:
     - sudo chown -R ubuntu.ubuntu /fjnfs
     - sudo mkdir -p /fj/logback/log/
     - sudo chown -R ubuntu.ubuntu /fj
-    # clean the artifacts dir from the previous build
-    - rm -rf artifacts && mkdir artifacts
 
 test:
   override:
@@ -34,7 +32,7 @@ test:
         timeout: 7200
 
   post:
-    - find . -maxdepth 1 -type d ! -name "." ! -name 'artifacts' -exec cp -pr {}/target/site artifacts/{} \;
+    - find . -maxdepth 1 -type d ! -name "." -exec mv {}/target/site $CIRCLE_ARTIFACTS/{} \;
     # - mkdir -p $CIRCLE_TEST_REPORTS/junit/common
     # - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/common/ \;
 
