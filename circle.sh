@@ -29,7 +29,7 @@ case "$1" in
     wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.3.4.tar.gz
     tar -xvf elasticsearch-1.3.4.tar.gz
     cp -p core/src/test/resources/ci/elasticsearch.yml elasticsearch-1.3.4/config/elasticsearch.yml
-    /bin/sh elasticsearch-1.3.4/bin/elasticsearch: {background: true}
+    /bin/sh elasticsearch-1.3.4/bin/elasticsearch {background: true}
 
     # MySQL
     sudo apt-add-repository -y 'deb http://ppa.launchpad.net/ondrej/mysql-experimental/ubuntu precise main'
