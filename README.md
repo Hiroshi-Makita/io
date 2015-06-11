@@ -1,6 +1,6 @@
 personium.io
 ====
-[![Build Status](http://jenkins.personium.io:8080/job/personium.io-master/4//badge/icon)](http://jenkins.personium.io:8080/job/personium.io-master/4/)
+[![Build Status](http://jenkins.personium.io:8080/job/personium.io-master/badge/icon)](http://jenkins.personium.io:8080/job/personium.io-master/)
 
 An interconnectable open source BaaS(Backend as a Service) / PDS (Personal Data Store) server.
 
