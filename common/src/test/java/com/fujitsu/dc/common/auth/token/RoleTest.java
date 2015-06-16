@@ -1,5 +1,4 @@
 /**
- * 
  * personium.io
  * Copyright 2014 FUJITSU LIMITED
  *
